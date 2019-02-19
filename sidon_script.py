@@ -33,7 +33,7 @@ def foundSidonSet(A):
 	return True
 
 '''
-from class: square of the largest prime below N < max sidon set size below N < erdos turan bound for N.
+from class: largest prime below square root of N < max sidon set size below N < erdos turan bound for N.
 This tests all integers in that range in reversed order to find the largest Sidon Set.
 '''
 def largestSidonSet(N):
