@@ -17,8 +17,9 @@ def largest_prime_below(n):
     
 erdos_turan_bound = lambda n: int(n**(0.5)+2*(n**(0.25)+10))
 
-# print(erdos_turan_bound(N))
-# print(largest_prime_below(int(math.floor(N**(0.5)))))
+# to check
+# print(erdos_turan_bound(size))
+# print(largest_prime_below(int(size**(0.5))))
 
 '''
 Here, we keep track of all possible sums in A, returning false if there are any duplicates, and true otherwise.
