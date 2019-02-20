@@ -1,6 +1,6 @@
 import itertools
 
-size = 20
+size = 50
 
 '''
 This function uses the Sieve of Eratosthenes method to find all primes under n and returns the largest one.
@@ -36,7 +36,7 @@ def foundSidonSet(A):
 	return True
 
 '''
-from class: largest prime below square root of N < max sidon set size below N < erdos turan bound for N.
+from class: largest prime below square root of N < max sidon set size below N < Erdos-Turan bound for N.
 This tests all integers in that range in reversed order to find the largest Sidon Set.
 '''
 def largestSidonSet(N):
@@ -47,12 +47,17 @@ def largestSidonSet(N):
 			if foundSidonSet(A):
 				return "size: ", n, A
 	return "didn't find any"
+
 '''
 makes possible Sidon sets of size n from N.
+how can we efficiently generate all the potential Sidon Sets of size n from N?
+Omit: 
+- sets with n and 2n
+- sets with 1, n, n+1; 2, n, n+2; k, n, n+k
+- 
 '''
 def makeSidonSets(n,N):
-	print("sidonSets",n,N)
-	# how can we efficiently generate all the potential Sidon Sets of size n from N? Would we really need to generate N choose n sets?
+	print("Checking sets of size ",n," of ",N)
 	return list(itertools.combinations(range(N),n))
 
 print("largest found: ",largestSidonSet(size))
