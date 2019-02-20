@@ -27,12 +27,12 @@ print(largest_prime_below(int(size**(0.5))))
 Here, we keep track of all possible sums in A, returning false if there are any duplicates, and true otherwise.
 '''
 def foundSidonSet(A):
-	sums = []
+	sums = set()
 	for i in range(len(A)):
 		for j in range(i,len(A)):
 			if A[i]+A[j] in sums:
 				return False
-			sums.append(A[i]+A[j])
+			sums.add(A[i]+A[j])
 	return True
 
 '''
@@ -58,6 +58,6 @@ Omit:
 '''
 def makeSidonSets(n,N):
 	print("Checking sets of size ",n," of ",N)
-	return list(itertools.combinations(range(1,N+1),n))
+	return set(itertools.combinations(range(1,N+1),n))
 
 print("largest found: ",largestSidonSet(size))
