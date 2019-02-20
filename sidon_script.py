@@ -1,6 +1,6 @@
 import itertools
 
-size = 50
+size = 26
 
 '''
 This function uses the Sieve of Eratosthenes method to find all primes under n and returns the largest one.
@@ -58,6 +58,6 @@ Omit:
 '''
 def makeSidonSets(n,N):
 	print("Checking sets of size ",n," of ",N)
-	return list(itertools.combinations(range(N),n))
+	return list(itertools.combinations(range(1,N+1),n))
 
 print("largest found: ",largestSidonSet(size))
