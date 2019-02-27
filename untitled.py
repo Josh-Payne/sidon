@@ -1,6 +1,7 @@
+import itertools
 import time
 
-N = 50
+N = 148
 max_size = 0
 
 '''
@@ -20,17 +21,19 @@ def largest_prime_below(n):
     
 erdos_turan_bound = lambda n: int((n**(0.5))+(2*(n**(0.25)))+10)
 
+# to check
+
+
 '''
 Here, we keep track of all possible sums in A, returning false if there are any duplicates, and true otherwise.
 '''
 def foundSidonSet(A,allsets):
-	sums = allsets[str(A[:-1])].copy()
+	sums = allsets[str(A[:-1])]
 	for i in range(len(A)):
-		# for j in range(i,len(A)):
 		if A[i]+A[-1] in sums:
 			return False
 		sums.add(A[i]+A[-1])
-	allsets[str(A)] = sums
+	allsets[str(A)] = allsets[str(A[:-1])].union(sums)
 	return True
 
 '''
@@ -42,26 +45,55 @@ def largestSidonSet():
 	lower_bound = largest_prime_below(int(N**0.5))
 	sidonSets = list()
 	allsets = dict()
-	for n in range(1,upper_bound-int(upper_bound/2)):
+	for n in range(1,2):
 		sidonSet = list([n])
 		sidonSets.append(sidonSet)
 		allsets[str(sidonSet)] = set([n])
-	for n in range(2,upper_bound):
+	for n in range(1,N):
 		cardinalityIncrement = list()
 		for sidonSet in sidonSets:
-			if sidonSet[-1] <= N-max((8-n),0):
-				for i in range(sidonSet[-1]+1,N+1):
-					newSidon = sidonSet.copy()
-					newSidon.append(i)
-					if foundSidonSet(newSidon,allsets):
-						cardinalityIncrement.append(newSidon)
-			allsets.pop(str(sidonSet),None)
-
+			for i in range(sidonSet[-1]+1,N+1):
+				newSidon = sidonSet.copy()
+				newSidon.append(i)
+				if foundSidonSet(newSidon,allsets):
+					cardinalityIncrement.append(newSidon)
 		sidonSets = cardinalityIncrement
-		print(len(sidonSets))
-		if (n>7):
-			print(sidonSets)
+		
+		if n >=12:
+			print(cardinalityIncrement)
+		print(cardinalityIncrement[0])
+		# print(sidonSets)
+		# print("Stage: ",n)
 
+	# for n in range(sidonSet[-1],size+1):
+	# 	print(n)
+	# 	candidate = sidonSet
+	# 	candidate.append(n)
+	# 	if foundSidonSet(candidate,allsets):
+	# 		length = len(candidate)
+	# 		if length<=upper_bound:
+	# 			if max_size < length:
+	# 				max_size = length
+	# 			largestSidonSet(candidate)
+
+	# for n in bounds:
+	# 	print(n)
+	# 	substart = time.time()
+	# 	sidonSetsSizeN = makeSidonSets(n,N)
+	# 	print(time.time()-substart)
+	# 	for A in sidonSetsSizeN:
+	# 		if foundSidonSet(A):
+	# 			return "size: ", n, A
+	# return "didn't find any"
+
+'''
+makes possible Sidon sets of size n from N.
+how can we efficiently generate all the potential Sidon Sets of size n from N?
+Omit: 
+- sets with n and 2n
+- sets with 1, n, n+1; 2, n, n+2; k, n, n+k
+- 
+'''
 # def makeSidonSets(n,N):
 # 	print("Checking sets of size ",n," of ",N)
 # 	return list(itertools.combinations(range(1,N+1),n))

@@ -18,5 +18,5 @@ def add(sidonSet, newNum, sums):
             return False
     return True
 start = time.time()
-Sidon(100000000) # took 496 seconds for me
+Sidon(148) # took 496 seconds for me
 print(time.time()-start)
